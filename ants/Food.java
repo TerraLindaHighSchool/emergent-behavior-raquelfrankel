@@ -1,5 +1,5 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import greenfoot.*;// (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.Random;
 /**
  * Write a description of class Food here.
  * 
@@ -8,41 +8,25 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Food extends Actor
 {
-    /**
-     * Act - do whatever the Food wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act() 
+    private GreenfootImage Image;
+    private int crumb = 100;
+    private final int size = 30;
+    public Food()
     {
-       image();
-       crumbs();
-       size();
-    } 
-    private void image()
-    {
-     image = new GreenfootImage(80, 80);
-    }
-    private int crumbs()
-    {
-     int crumbs = 100;
-     
-    }
-    final private int size()
-    {
-     int size = 30;
+     Image = new GreenfootImage(size, size);   
+     updateImage();
+     removeCrumb();
     }
     private void updateImage()
     {
-      Object = new object(random)
-      
-    }
-    private void for loop()
-    {
-     int stDev = size / 6;
+     Random random = new Random();
+     for(int i = 0; 1< crumb; i++)
+     {
+             int stDev = size / 6;
      int x = (int) (stDev * random.nextGaussian( ) + 3 * stDev);
      int y = (int) (stDev * random.nextGaussian( ) + 3 * stDev);
             
-     // keep crumbs in image
+     // keep crumbs in Image
      if(x < 0) 
          x = 0;
      if(x >= size) 
@@ -52,11 +36,20 @@ public class Food extends Actor
      if(y >= size) 
          y = size - 1;
      
-     Color color = new Color(r, g, b);  // pick the color you want by replacing r, g, b with values.
-     image.setColorAt(x, y, color);
+     Color color = new Color(165, 42, 42);  // pick the color you want by replacing r, g, b with values.
+     Image.setColorAt(x, y, color);
+
+     }
+     setImage(Image);
     }
     public void removeCrumb()
     {
-    
+     crumb--;
+     Image.clear();
+     if (crumb == 0) 
+        {
+            getWorld().removeObject(this);
+        }
+     
     }
-}
+}   
