@@ -21,7 +21,8 @@ public class Ant extends Creature
      */
     public void act()
     {
-        testFoodPile(); // This currently does not do anything
+        randomWalk();
+        testFoodPile(); 
     }
     
     private void testFoodPile()

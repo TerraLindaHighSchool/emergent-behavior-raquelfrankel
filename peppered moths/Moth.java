@@ -123,7 +123,7 @@ public class Moth extends Animal
      */
     private boolean mutate()
     {
-        return Greenfoot.getRandomNumber(100) > MUTATION_PROBABILITY;
+        return Greenfoot.getRandomNumber(10000) > MUTATION_PROBABILITY;
     }
     
     public boolean isPeppered()

@@ -31,7 +31,7 @@ public class Forest extends World
      */
     public Forest()
     {    
-        super(WIDTH, HEIGHT, 10);
+        super(WIDTH, HEIGHT,10);
         Greenfoot.setSpeed(30);
         trees();
         populate();
