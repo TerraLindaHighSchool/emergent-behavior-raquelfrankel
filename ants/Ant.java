@@ -7,25 +7,40 @@ import greenfoot.*;
  * @version 0.1
  */
 public class Ant extends Creature
-{
-    /**
-     * Create an ant with a given home hill. The initial speed is zero (not moving).
-     */
-    public Ant(AntHill home)
-    {
+   {private boolean carryingFood;
+    private GreenfootImage image1;
+    private GreenfootImage image2;
+      /**
+       * Create an ant with a given home hill. The initial speed is zero (not moving).
+       */
+      public Ant(AntHill home)
+      {
         setHomeHill(home);
-    }
-
-    /**
-     * Do what an ant's gotta do.
-     */
-    public void act()
-    {
-        randomWalk();
-        testFoodPile(); 
+        image1 =  getImage();
+        image2 = new GreenfootImage("ant-with-food.gif");
+       }
+    
+      private boolean atHome()
+      {
+         if (getHomeHill() != null) {
+            return (Math.abs(getX() - getHomeHill().getX()) < 4) && 
+                   (Math.abs(getY() - getHomeHill().getY()) < 4);
+           }
+           else {
+               return false;
+       }
     }
     
-    private void testFoodPile()
+      /**
+      * Do what an ant's gotta do.
+      */
+      public void act()
+    {
+        status();
+        //checkForFood(); 
+    }
+    
+      private void checkForFood()
     {
     
     
@@ -33,8 +48,41 @@ public class Ant extends Creature
         if (food != null) 
         {
             food.removeCrumb();
+            carryingFood = true;
+            image1 = image2;
         }
     
     
-    }  
+     } 
+    
+    private void searchForFood()
+      {
+      randomWalk();
+      checkForFood();
+     }
+    
+    private void status()
+      {
+      if(carryingFood)
+      {
+       walkTowardsHome(); 
+      }
+      else
+      {
+        searchForFood();
+      }
+      if (atHome())
+      {
+        image2 = image1;
+        carryingFood = false;
+        getHomeHill( ).countFood();
+      }
+      else
+      {
+          searchForFood();
+       }
+      }
 }
+
+
+   
