@@ -1,4 +1,4 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, and Greenfoot)
+import greenfoot.*; // (World, Actor, GreenfootImage, and Greenfoot)
 
 /**
  * The world where ants live.
@@ -41,5 +41,13 @@ public class AntWorld extends World
         addObject(food3,371,155);
         Food food4 = new Food();
         addObject(food4,304,386);
+    }
+    
+    public void act()
+    {
+     if(getObjects(Food.class) || (getObjects(Pharamone.class) == 0));
+     {
+      endGame = true;
+     }
     }
 }
