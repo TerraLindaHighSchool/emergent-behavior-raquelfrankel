@@ -45,9 +45,9 @@ public class AntWorld extends World
     
     public void act()
     {
-     if(getObjects(Food.class) || (getObjects(Pharamone.class) == 0));
+     if(getObjects(Food.class).size() == 0 && (getObjects(Pharamone.class).size() == 0))
      {
-      endGame = true;
+      Greenfoot.stop();
      }
     }
 }

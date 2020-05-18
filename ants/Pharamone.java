@@ -24,7 +24,7 @@ public class Pharamone extends Actor
     {intensity--;
         if(intensity <= 0)
         {
-            // getWorld().removeObject(this);
+            getWorld().removeObject(this);
         }
         else
         {

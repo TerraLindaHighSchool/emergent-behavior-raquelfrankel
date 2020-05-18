@@ -14,7 +14,7 @@ public class Ant extends Creature
     private int TIME_FOLLOWING_TRAIL;
     private int phAvailable;
     private int followTrialTimeRemaining;
-      /**
+     /**
        * Create an ant with a given home hill. The initial speed is zero (not moving).
        */
        public Ant(AntHill home)
@@ -38,15 +38,15 @@ public class Ant extends Creature
        }
       }
     
-        /**
+      /**
       * Do what an ant's gotta do.
       */
       public void act()
       {
         status();
-        //checkForFood(); 
+
       }
-    
+      
       private void checkForFood()
       {
     
@@ -64,74 +64,75 @@ public class Ant extends Creature
     
       private void searchForFood()
       {
-       if(followTrialTimeRemaining == 0)
-      {
-        walkTowardspharamoneCenter();
-        randomWalk();
-       }
-       else
-       {
-        walkAwayFromHome();
-       }
-       checkForFood();
-     }
-    
-     private void status()
-      {
-      if(carryingFood)
-      {
-       walkTowardsHome(); 
-       handlePheromoneDrop();
-      }
-      else
-      {
-        followTrialTimeRemaining -- ;
-        searchForFood(); 
-      }
-      if (atHome())
-      {
-        image2 = image1;
-        carryingFood = false;
-        getHomeHill( ).countFood();
-      }
-      else
-      {
-          searchForFood();
-       }
-      }
-    
-     private void handlePheromoneDrop()
-     {
-              if (phAvailable == MAX_PH_AVAILABLE) {
-            Pharamone ph = new Pharamone();
-            //getWorld().addObject(ph, getX(), getY());
-            phAvailable = 0;
+         if(followTrialTimeRemaining == 0)
+          {
+             (SmellsPh)
+             {
+              walkTowardspharamoneCenter();
+             }
+            else
+             {
+            randomWalk(); 
+            followTrialTimeRemaining --;
+            walkAwayFromHome();
+          }
+          checkForFood();
+         }
         }
-        else 
+      private void status()
+       { {
+            if(carryingFood)
+           {
+            walkTowardsHome(); 
+            handlePheromoneDrop();
+                       if (atHome())
+            {
+             setImage(image1);
+             carryingFood = false;
+             getHomeHill( ).countFood();
+            }
+           }
+            else
+           {
+             followTrialTimeRemaining -- ;
+             searchForFood(); 
+            }
+         }
+       }
+    
+       private void handlePheromoneDrop()
         {
+              if (phAvailable == MAX_PH_AVAILABLE) 
+           {
+            getWorld().addObject(new Pharamone(), getX(), getY());
+            phAvailable = 0;
+           }
+           else 
+           {
             phAvailable++;
-        }
-     }
+           }
+         }
     
-     private boolean pharamonesmell()
-     { 
-        Actor ph = getOneIntersectingObject(Pharamone.class);
-        return (ph != null); 
-     }
+       private boolean pharamonesmell()
+         { 
+           Actor ph = getOneIntersectingObject(Pharamone.class);
+           return (ph != null); 
+         }
     
-     private void walkTowardspharamoneCenter()
-     {
-       Actor ph = getOneIntersectingObject(Pharamone.class);
-       if (ph != null) {
+       private void walkTowardspharamoneCenter()
+         {
+             Actor ph = getOneIntersectingObject(Pharamone.class);
+            if (ph != null)
+            {
             headTowards(ph);
             walk();
             if (ph.getX() == getX() && ph.getY() == getY())
             {
-                TIME_FOLLOWING_TRAIL = followTrialTimeRemaining;
+                followTrialTimeRemaining = TIME_FOLLOWING_TRAIL;
             }
            
-       }
-     }
+             }
+          }
 }
 
 
