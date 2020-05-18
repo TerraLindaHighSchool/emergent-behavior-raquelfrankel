@@ -56,7 +56,7 @@ public class Ant extends Creature
         {
             food.removeCrumb();
             carryingFood = true;
-            image1 = image2;
+            setImage(image1);
         }
     
     
@@ -64,26 +64,30 @@ public class Ant extends Creature
     
       private void searchForFood()
       {
-         if(followTrialTimeRemaining == 0)
-          {
-             (SmellsPh)
+             if(followTrialTimeRemaining == 0)
              {
-              walkTowardspharamoneCenter();
-             }
-            else
-             {
-            randomWalk(); 
-            followTrialTimeRemaining --;
-            walkAwayFromHome();
-          }
-          checkForFood();
-         }
+                    if(pharamonesmell())
+                   {
+                         walkTowardspharamoneCenter();
+                   }
+                   else
+                   {
+                         randomWalk(); 
+                   }
+              }
+              else 
+              {
+                   followTrialTimeRemaining --;
+                   walkAwayFromHome();
+               }
+               checkForFood();
         }
-      private void status()
+        
+        private void status()
        { {
             if(carryingFood)
-           {
-            walkTowardsHome(); 
+             {
+          walkTowardsHome(); 
             handlePheromoneDrop();
                        if (atHome())
             {
@@ -94,13 +98,13 @@ public class Ant extends Creature
            }
             else
            {
-             followTrialTimeRemaining -- ;
+            
              searchForFood(); 
             }
          }
        }
     
-       private void handlePheromoneDrop()
+         private void handlePheromoneDrop()
         {
               if (phAvailable == MAX_PH_AVAILABLE) 
            {
@@ -125,7 +129,6 @@ public class Ant extends Creature
             if (ph != null)
             {
             headTowards(ph);
-            walk();
             if (ph.getX() == getX() && ph.getY() == getY())
             {
                 followTrialTimeRemaining = TIME_FOLLOWING_TRAIL;
